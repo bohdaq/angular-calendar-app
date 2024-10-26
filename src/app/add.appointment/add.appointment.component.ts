@@ -24,7 +24,6 @@ export class AddAppointmentComponent {
   constructor(private fb: FormBuilder) {
     this.myForm = this.fb.group({
       name: ['', Validators.required], // Name field is required
-      email: ['', [Validators.required, Validators.email]], // Email field with validation
     });
   }
 

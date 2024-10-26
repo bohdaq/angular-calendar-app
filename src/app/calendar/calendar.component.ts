@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import moment from 'moment';
 
 @Component({
@@ -15,7 +15,8 @@ export class CalendarComponent implements OnInit {
   currentMonth: moment.Moment;
   daysInMonth: moment.Moment[] = [];
 
-  constructor() {
+
+  constructor(private router: Router) {
     this.currentMonth = moment();
   }
 
@@ -38,5 +39,9 @@ export class CalendarComponent implements OnInit {
   changeMonth(direction: number): void {
     this.currentMonth.add(direction, 'month');
     this.generateCalendar();
+  }
+
+  goToDay(day: string) {
+    this.router.navigate(['/day/', day]); // Navigate to the user profile
   }
 }

@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default route
     { path: 'home', loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule) },
-    { path: 'day', component: DayComponent },
+    { path: 'day/:day', component: DayComponent },
     { path: 'add', component: AddAppointmentComponent },
 ];
 
