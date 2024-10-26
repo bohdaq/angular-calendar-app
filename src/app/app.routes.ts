@@ -5,7 +5,7 @@ import { AddAppointmentComponent } from './add.appointment/add.appointment.compo
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default route
-    { path: 'home', component: CalendarComponent },
+    { path: 'home', loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule) },
     { path: 'day', component: DayComponent },
     { path: 'add', component: AddAppointmentComponent },
 ];
