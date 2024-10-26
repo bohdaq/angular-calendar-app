@@ -1,0 +1,12 @@
+<div class="calendar">
+    <header>
+        <button (click)="changeMonth(-1)">Previous</button>
+        <h2>{{ currentMonth.format('MMMM YYYY') }}</h2>
+        <button (click)="changeMonth(1)">Next</button>
+    </header>
+    <div class="days">
+        <div class="day" *ngFor="let day of daysInMonth">
+            <span>{{ day.date() }}</span>
+        </div>
+    </div>
+</div>
