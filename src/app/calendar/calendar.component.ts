@@ -26,7 +26,7 @@ export class CalendarComponent implements OnInit {
     const endOfMonth = this.currentMonth.clone().endOf('month').endOf('week');
 
     this.daysInMonth = [];
-    let day = startOfMonth.clone();
+    const day = startOfMonth.clone();
     while (day.isBefore(endOfMonth, 'day')) {
       this.daysInMonth.push(day.clone());
       day.add(1, 'day');
