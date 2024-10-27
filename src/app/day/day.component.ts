@@ -53,4 +53,8 @@ export class DayComponent {
     appointmentList[this.day].items = this.appointmentList;
     localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
   }
+
+  delete(index: number) {
+    console.log('delete', index);
+  }
 }
