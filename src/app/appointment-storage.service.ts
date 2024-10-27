@@ -6,8 +6,6 @@ import { Appointment } from './day/day.component';
 })
 export class AppointmentStorageService {
 
-  constructor() { }
-
   getAppointments(day: string): Appointment[] {
     let appointmentList = this.populateEmptyFields(day);
 

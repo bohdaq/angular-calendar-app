@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,7 +21,7 @@ import { Appointment } from '../day/day.component';
   templateUrl: './add.appointment.component.html',
   styleUrl: './add.appointment.component.css'
 })
-export class AddAppointmentComponent {
+export class AddAppointmentComponent implements OnInit {
   myForm: FormGroup;
   day!: string;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private storage: AppointmentStorageService) {
@@ -38,7 +38,7 @@ export class AddAppointmentComponent {
 
   onSubmit() {
     if (this.myForm.valid) {
-      let appointment: Appointment = {
+      const appointment: Appointment = {
         day: this.day,
         name: this.myForm.value.name
       }
