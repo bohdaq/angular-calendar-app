@@ -40,7 +40,7 @@ export class AddAppointmentComponent {
       console.log(this.myForm.value); // Handle the form submission
       let appointment = {
         day: this.day,
-        name: this.myForm.value
+        name: this.myForm.value.name
       }
 
       let json: string = localStorage['appointmentList'] || '{}';

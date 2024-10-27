@@ -1,12 +1,11 @@
 <div class="container">
     <h3>{{day}}</h3>
 
-    Existing appointments:
-    <mat-list role="list">
-        <mat-list-item role="listitem">Item 1</mat-list-item>
-        <mat-list-item role="listitem">Item 2</mat-list-item>
-        <mat-list-item role="listitem">Item 3</mat-list-item>
-    </mat-list>
+
+    <h4>Existing appointments:</h4>
+    <div role="list" *ngFor="let appointment of appointmentList">
+        <div role="listitem">{{appointment.name}}</div>
+    </div>
 
     <button (click)="goToAddNewAppointment()" mat-button>Add New Appointment</button>
 </div>

@@ -1,17 +1,24 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, Router } from '@angular/router';
 
+interface Appointment {
+  day: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-day',
   standalone: true,
-  imports: [MatListModule, MatButton],
+  imports: [MatListModule, MatButton, NgFor],
   templateUrl: './day.component.html',
   styleUrl: './day.component.css'
 })
 export class DayComponent {
   day!: string;
+  appointmentList: Appointment[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -20,6 +27,17 @@ export class DayComponent {
       this.day = params.get('day')!; // Get the user ID from the route
       // You can now use the userId to fetch user data or perform other actions
     });
+
+    let json: string = localStorage['appointmentList'] || '{}';
+    let appointmentList = JSON.parse(json) || {};
+
+    if (!appointmentList[this.day]) {
+      appointmentList[this.day] = {
+        items: []
+      }
+    }
+
+    this.appointmentList = appointmentList[this.day].items;
   }
 
   goToAddNewAppointment() {
