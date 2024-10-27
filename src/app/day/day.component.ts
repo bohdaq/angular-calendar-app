@@ -24,6 +24,6 @@ export class DayComponent {
 
   goToAddNewAppointment() {
     console.log('add');
-    this.router.navigate(['/add']); // Navigate to the user profile
+    this.router.navigate(['/add/' + this.day]); // Navigate to the user profile
   }
 }
