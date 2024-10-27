@@ -5,7 +5,7 @@
         <button mat-button (click)="changeMonth(1)">Next</button>
     </header>
     <div class="days">
-        <div class="day" *ngFor="let day of daysInMonth">
+        <div (click)="goToDay(day.toISOString().split('T')[0])" class="day" *ngFor="let day of daysInMonth">
             <span>{{ day.date() }}</span>
         </div>
     </div>

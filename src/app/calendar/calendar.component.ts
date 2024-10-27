@@ -26,7 +26,7 @@ export class CalendarComponent implements OnInit {
 
   generateCalendar(): void {
     const startOfMonth = this.currentMonth.clone().startOf('month').startOf('week');
-    const endOfMonth = this.currentMonth.clone().endOf('month').endOf('week');
+    let endOfMonth = this.currentMonth.clone().endOf('month').endOf('week').add(1, 'day');
 
     this.daysInMonth = [];
     const day = startOfMonth.clone();
@@ -42,6 +42,7 @@ export class CalendarComponent implements OnInit {
   }
 
   goToDay(day: string) {
+    console.log('goToDay');
     this.router.navigate(['/day/', day]); // Navigate to the user profile
   }
 }
