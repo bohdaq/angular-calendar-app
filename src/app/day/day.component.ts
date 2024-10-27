@@ -48,5 +48,9 @@ export class DayComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.appointmentList, event.previousIndex, event.currentIndex);
+    let json: string = localStorage['appointmentList'] || '{}';
+    let appointmentList = JSON.parse(json) || {};
+    appointmentList[this.day].items = this.appointmentList;
+    localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
   }
 }
