@@ -1,6 +1,6 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +18,7 @@ export interface Appointment {
   templateUrl: './day.component.html',
   styleUrl: './day.component.css'
 })
-export class DayComponent {
+export class DayComponent implements OnInit {
   day!: string;
   appointmentList: Appointment[] = [];
 

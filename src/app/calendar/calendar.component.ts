@@ -26,7 +26,7 @@ export class CalendarComponent implements OnInit {
 
   generateCalendar(): void {
     const startOfMonth = this.currentMonth.clone().startOf('month').startOf('week');
-    let endOfMonth = this.currentMonth.clone().endOf('month').endOf('week').add(1, 'day');
+    const endOfMonth = this.currentMonth.clone().endOf('month').endOf('week').add(1, 'day');
 
     this.daysInMonth = [];
     const day = startOfMonth.clone();
@@ -46,8 +46,8 @@ export class CalendarComponent implements OnInit {
   }
 
   areThereAppointments(day: string) {
-    let json: string = localStorage['appointmentList'] || '{}';
-    let appointmentList = JSON.parse(json) || {};
+    const json: string = localStorage['appointmentList'] || '{}';
+    const appointmentList = JSON.parse(json) || {};
     return appointmentList[day] && appointmentList[day].items.length > 0
   }
 }
