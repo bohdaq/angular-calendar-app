@@ -12,3 +12,7 @@
     border: 1px solid #ccc;
     margin: 2px;
 }
+
+[has-appointments='true'] {
+    border: 1px solid blue;
+}

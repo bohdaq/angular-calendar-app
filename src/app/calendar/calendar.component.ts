@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
@@ -8,7 +8,7 @@ import moment from 'moment';
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
-  imports: [NgFor, RouterLink, MatButton],
+  imports: [NgFor, RouterLink, MatButton, NgIf],
   standalone: true
 })
 export class CalendarComponent implements OnInit {
@@ -44,5 +44,12 @@ export class CalendarComponent implements OnInit {
   goToDay(day: string) {
     console.log('goToDay');
     this.router.navigate(['/day/', day]); // Navigate to the user profile
+  }
+
+  areThereAppointments(day: string) {
+    console.log(day);
+    let json: string = localStorage['appointmentList'] || '{}';
+    let appointmentList = JSON.parse(json) || {};
+    return appointmentList[day] && appointmentList[day].items.length > 0
   }
 }

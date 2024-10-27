@@ -5,7 +5,8 @@
         <button mat-button (click)="changeMonth(1)">Next</button>
     </header>
     <div class="days">
-        <div (click)="goToDay(day.format('YYYY-MM-DD'))" class="day" *ngFor="let day of daysInMonth">
+        <div [attr.has-appointments]="areThereAppointments(day.format('YYYY-MM-DD'))"
+            (click)="goToDay(day.format('YYYY-MM-DD'))" class="day" *ngFor="let day of daysInMonth">
             <span>{{ day.format('D') }}</span>
         </div>
     </div>
