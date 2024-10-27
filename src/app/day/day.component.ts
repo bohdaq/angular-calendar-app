@@ -1,3 +1,4 @@
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
@@ -12,7 +13,7 @@ interface Appointment {
 @Component({
   selector: 'app-day',
   standalone: true,
-  imports: [MatListModule, MatButton, NgFor],
+  imports: [MatListModule, MatButton, NgFor, CdkDropList, CdkDrag],
   templateUrl: './day.component.html',
   styleUrl: './day.component.css'
 })
@@ -43,5 +44,9 @@ export class DayComponent {
   goToAddNewAppointment() {
     console.log('add');
     this.router.navigate(['/add/' + this.day]); // Navigate to the user profile
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.appointmentList, event.previousIndex, event.currentIndex);
   }
 }
