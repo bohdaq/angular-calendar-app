@@ -6,6 +6,8 @@
     <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" role="list">
         @for (appointment of appointmentList; track appointment) {
         <div class="example-box" cdkDrag>{{appointment.name}}</div>
+        } @empty {
+        <div class="example-box">There are no appointments.</div>
         }
     </div>
 
