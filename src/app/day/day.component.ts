@@ -26,8 +26,7 @@ export class DayComponent {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.day = params.get('day')!; // Get the user ID from the route
-      // You can now use the userId to fetch user data or perform other actions
+      this.day = params.get('day')!;
     });
 
     this.appointmentList = this.storage.getAppointments(this.day);
@@ -35,15 +34,12 @@ export class DayComponent {
 
   goToAddNewAppointment() {
     console.log('add');
-    this.router.navigate(['/add/' + this.day]); // Navigate to the user profile
+    this.router.navigate(['/add/' + this.day]);
   }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.appointmentList, event.previousIndex, event.currentIndex);
-    let json: string = localStorage['appointmentList'] || '{}';
-    let appointmentList = JSON.parse(json) || {};
-    appointmentList[this.day].items = this.appointmentList;
-    localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
+    this.storage.setAppointments(this.day, this.appointmentList)
   }
 
   delete(index: number) {

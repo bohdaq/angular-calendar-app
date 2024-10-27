@@ -37,6 +37,20 @@ export class AppointmentStorageService {
     localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
   }
 
+  setAppointments(day: string, appointments: Appointment[]) {
+    let json: string = localStorage['appointmentList'] || '{}';
+    let appointmentList = JSON.parse(json) || {};
+
+    if (!appointmentList[day]) {
+      appointmentList[day] = {
+        items: []
+      }
+    }
+
+    appointmentList[day].items = appointments;
+    localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
+  }
+
   deleteAppointment(day: string, index: number) {
     let json: string = localStorage['appointmentList'] || '{}';
     let appointmentList = JSON.parse(json) || {};
