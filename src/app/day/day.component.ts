@@ -33,7 +33,6 @@ export class DayComponent {
   }
 
   goToAddNewAppointment() {
-    console.log('add');
     this.router.navigate(['/add/' + this.day]);
   }
 
@@ -43,7 +42,6 @@ export class DayComponent {
   }
 
   delete(index: number) {
-    console.log('delete', index);
     this.storage.deleteAppointment(this.day, index);
     this.appointmentList = this.storage.getAppointments(this.day);
   }

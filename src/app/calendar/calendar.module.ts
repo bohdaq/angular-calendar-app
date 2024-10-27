@@ -5,7 +5,7 @@ import { FeatureRoutingModule } from './calendar-routing.module';
 @NgModule({
     imports: [
         CommonModule,
-        FeatureRoutingModule // Import the routing module
+        FeatureRoutingModule
     ]
 })
 export class CalendarModule { }

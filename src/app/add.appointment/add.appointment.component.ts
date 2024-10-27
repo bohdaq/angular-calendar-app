@@ -38,14 +38,12 @@ export class AddAppointmentComponent {
 
   onSubmit() {
     if (this.myForm.valid) {
-      console.log(this.myForm.value);
       let appointment: Appointment = {
         day: this.day,
         name: this.myForm.value.name
       }
 
       this.storage.addAppointment(this.day, appointment);
-
       this.router.navigate(['/day/' + this.day]);
     }
   }

@@ -42,12 +42,10 @@ export class CalendarComponent implements OnInit {
   }
 
   goToDay(day: string) {
-    console.log('goToDay');
-    this.router.navigate(['/day/', day]); // Navigate to the user profile
+    this.router.navigate(['/day/', day]);
   }
 
   areThereAppointments(day: string) {
-    console.log(day);
     let json: string = localStorage['appointmentList'] || '{}';
     let appointmentList = JSON.parse(json) || {};
     return appointmentList[day] && appointmentList[day].items.length > 0
