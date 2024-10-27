@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppointmentStorageService } from '../appointment-storage.service';
+import { Appointment } from '../day/day.component';
 
 @Component({
   selector: 'app-add.appointment',
@@ -22,40 +24,27 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddAppointmentComponent {
   myForm: FormGroup;
   day!: string;
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private storage: AppointmentStorageService) {
     this.myForm = this.fb.group({
-      name: ['', Validators.required], // Name field is required
+      name: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.day = params.get('day')!; // Get the user ID from the route
-      // You can now use the userId to fetch user data or perform other actions
+      this.day = params.get('day')!;
     });
   }
 
   onSubmit() {
     if (this.myForm.valid) {
-      console.log(this.myForm.value); // Handle the form submission
-      let appointment = {
+      console.log(this.myForm.value);
+      let appointment: Appointment = {
         day: this.day,
         name: this.myForm.value.name
       }
 
-      let json: string = localStorage['appointmentList'] || '{}';
-      let appointmentList = JSON.parse(json) || {};
-
-      if (!appointmentList[this.day]) {
-        appointmentList[this.day] = {
-          items: []
-        }
-      }
-
-      appointmentList[this.day].items.push(appointment);
-      localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
-
-      console.log('appointmentList', appointmentList);
+      this.storage.addAppointment(this.day, appointment);
 
       this.router.navigate(['/day/' + this.day]);
     }

@@ -4,8 +4,9 @@ import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppointmentStorageService } from '../appointment-storage.service';
 
-interface Appointment {
+export interface Appointment {
   day: string;
   name: string;
 }
@@ -21,7 +22,7 @@ export class DayComponent {
   day!: string;
   appointmentList: Appointment[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private storage: AppointmentStorageService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -29,16 +30,7 @@ export class DayComponent {
       // You can now use the userId to fetch user data or perform other actions
     });
 
-    let json: string = localStorage['appointmentList'] || '{}';
-    let appointmentList = JSON.parse(json) || {};
-
-    if (!appointmentList[this.day]) {
-      appointmentList[this.day] = {
-        items: []
-      }
-    }
-
-    this.appointmentList = appointmentList[this.day].items;
+    this.appointmentList = this.storage.getAppointments(this.day);
   }
 
   goToAddNewAppointment() {
