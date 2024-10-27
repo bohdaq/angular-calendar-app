@@ -9,51 +9,42 @@ export class AppointmentStorageService {
   constructor() { }
 
   getAppointments(day: string): Appointment[] {
-    let json: string = localStorage['appointmentList'] || '{}';
-    let appointmentList = JSON.parse(json) || {};
-
-    if (!appointmentList[day]) {
-      appointmentList[day] = {
-        items: []
-      }
-    }
+    let appointmentList = this.populateEmptyFields(day);
 
     let appointments: Appointment[] = appointmentList[day].items;
     return appointments;
   }
 
   addAppointment(day: string, appointment: Appointment) {
-
-    let json: string = localStorage['appointmentList'] || '{}';
-    let appointmentList = JSON.parse(json) || {};
-
-    if (!appointmentList[day]) {
-      appointmentList[day] = {
-        items: []
-      }
-    }
+    let appointmentList = this.populateEmptyFields(day);
 
     appointmentList[day].items.push(appointment);
     localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
   }
 
   setAppointments(day: string, appointments: Appointment[]) {
-    let json: string = localStorage['appointmentList'] || '{}';
-    let appointmentList = JSON.parse(json) || {};
-
-    if (!appointmentList[day]) {
-      appointmentList[day] = {
-        items: []
-      }
-    }
+    let appointmentList = this.populateEmptyFields(day);
 
     appointmentList[day].items = appointments;
     localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
   }
 
   deleteAppointment(day: string, index: number) {
+    let appointmentList = this.populateEmptyFields(day);
+
+    appointmentList[day].items.splice(index, 1);
+    localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
+  }
+
+  getCalendar() {
     let json: string = localStorage['appointmentList'] || '{}';
     let appointmentList = JSON.parse(json) || {};
+
+    return appointmentList;
+  }
+
+  populateEmptyFields(day: string) {
+    let appointmentList = this.getCalendar();
 
     if (!appointmentList[day]) {
       appointmentList[day] = {
@@ -61,7 +52,6 @@ export class AppointmentStorageService {
       }
     }
 
-    appointmentList[day].items.splice(index, 1);
-    localStorage.setItem('appointmentList', JSON.stringify(appointmentList));
+    return appointmentList;
   }
 }
